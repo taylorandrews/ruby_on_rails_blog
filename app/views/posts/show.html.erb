@@ -1,0 +1,64 @@
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header header2" >
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <center class="post-heading">
+                        <h1><%= @post.title %></h1>
+                        <center class="meta">
+                            <%= link_to "edit", edit_post_path(@post) %> |
+                            <%= link_to "delete", post_path(@post), method: :delete, data: {confirm: "you sure?"}%>
+                        </center>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <p>
+                        <%= @post.body %>
+
+                        <hr>
+                        <h2>comments:</h2>
+                        <hr>
+                        <%= render @post.comments.order("created_at DESC") %>
+                        <%= form_for [@post, @post.comments.build] do |f| %>
+                            <%= f.label :name %><br>
+                            <%= f.text_field :name %><br>
+
+                            <%= f.label :body %><br>
+                            <%= f.text_area :body %><br>
+
+                            <%= f.submit %>
+                        <% end %>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+    </article>
+
+
+<!-- <h1> show template <%= params[:id]%> <%= link_to "back", posts_path%> </h1>
+
+
+<h2> comments: </h2>
+
+<%= render @post.comments.order("created_at DESC") %>
+
+<h2> comment here </h2>
+
+<%= form_for [@post, @post.comments.build] do |f| %>
+    <%= f.label :name %><br>
+    <%= f.text_field :name %><br>
+
+    <%= f.label :body %><br>
+    <%= f.text_area :body %><br>
+
+    <%= f.submit %>
+<% end %> -->
